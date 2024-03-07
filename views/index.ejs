@@ -13,8 +13,32 @@
       <h1 class="text-3xl font-bold">Books I've Read - Luca Wang</h1>
     </div>
   </header>
-
   <main class="container mx-auto px-4 py-8 flex-grow">
+    <%
+function renderStars(rating) {
+  let stars = '';
+  const fullStars = Math.floor(rating);
+  const hasHalfStar = rating % 1 !== 0;
+
+  // Render full stars
+  for (let i = 0; i < fullStars; i++) {
+    stars += '<i class="fas fa-star text-yellow-400"></i>';
+  }
+
+  // Render half star if necessary
+  if (hasHalfStar) {
+    stars += '<i class="fas fa-star-half-alt text-yellow-400"></i>';
+  }
+
+  // Render empty stars
+  const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+  for (let i = 0; i < emptyStars; i++) {
+    stars += '<i class="far fa-star text-gray-400"></i>';
+  }
+
+  return stars;
+}
+%>
     <div class="space-y-6">
       <% if (notes.length === 0) { %>
         <div class="text-center">
@@ -27,24 +51,14 @@
         <% for (let note of notes) { %>
           <div class="bg-gray-800 rounded-lg shadow-lg p-4 flex">
             <div class="w-32 h-48 bg-gray-700 rounded-lg mr-4 flex-shrink-0">
-              <!-- Book Cover Image -->
-              <% if (note.coverImage) { %>
-               <a href="/book/<%= note.id %>"><img src="<%= note.coverImage %>" alt="<%= note.title %> Cover" class="w-full h-full object-cover rounded-lg"></a> 
-              <% } %>
+               <a href="/book/<%= note.id %>"><img src="images/<%= note.id %>.jpg"  class="w-full h-full object-cover rounded-lg"></a> 
             </div>
             <div class="flex-grow flex flex-col justify-between">
               <div>
                 <a href="/book/<%= note.id %>" class="text-xl font-bold mb-2 hover:text-purple-400"><%= note.title %></a>
                 <p class="text-gray-400 mb-1"><%= note.author %></p>
                 <div class="flex items-center mb-2">
-                  <div class="flex items-center text-yellow-400">
-                    <% for (let i = 0; i < Math.floor(note.rating); i++) { %>
-                      <i class="fas fa-star"></i>
-                    <% } %>
-                    <% if (note.rating % 1 !== 0) { %>
-                      <i class="fas fa-star-half-alt"></i>
-                    <% } %>
-                  </div>
+                  <%- renderStars(note.rating) %>
                 </div>
                 <p class="text-gray-300"><%= note.description %></p>
               </div>
