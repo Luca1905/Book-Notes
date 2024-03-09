@@ -32,6 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Routes
 app.get("/", async (req, res) => {
   const notes = await getNotesFromDatabase();
+  // const notes = [];
   try {
     for (let note = 0; note < notes.length; note++) {
       if (
@@ -55,6 +56,13 @@ app.get("/", async (req, res) => {
   }
 
   res.render("index", { notes: notes });
+});
+
+app.get("/book/:id", async (req, res) => {
+  const id = req.params.id;
+  const notes = await getNotesFromDatabase();
+
+  res.render("book", {note: (notes).find((note) => {id === note.id})});
 });
 
 app.listen(port, () => {

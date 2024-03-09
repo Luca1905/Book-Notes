@@ -7,8 +7,8 @@
   <link href="styles/output.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body class="bg-gray-900 text-white min-h-screen flex flex-col">
-  <header class="bg-gradient-to-r from-purple-600 to-indigo-600 py-6">
+<body class="dark:bg-background text-white min-h-screen flex flex-col">
+  <header class="bg-gray-900 py-6">
     <div class="container mx-auto px-4 flex items-center justify-between">
       <h1 class="text-3xl font-bold">Books I've Read - Luca Wang</h1>
     </div>
@@ -45,7 +45,7 @@ function renderStars(rating) {
           <i class="fas fa-book-open text-6xl text-gray-500 mb-4"></i>
           <h2 class="text-3xl font-bold mb-2">No posts yet</h2>
           <p class="text-gray-400 mb-6">It looks like there are no book notes posted yet.</p>
-          <a href="#" class="bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded">Start Reading</a>
+          <a href="/create" class="bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded">Create a new post</a>
         </div>
       <% } else { %>
         <% for (let note of notes) { %>
