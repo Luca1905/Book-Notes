@@ -6,39 +6,39 @@
   <title>Books I've Read - Luca Wang</title>
   <link href="styles/output.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <%
+  function renderStars(rating) {
+    let stars = '';
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 !== 0;
+  
+    // Render full stars
+    for (let i = 0; i < fullStars; i++) {
+      stars += '<i class="fas fa-star text-yellow-400"></i>';
+    }
+  
+    // Render half star if necessary
+    if (hasHalfStar) {
+      stars += '<i class="fas fa-star-half-alt text-yellow-400"></i>';
+    }
+  
+    // Render empty stars
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+    for (let i = 0; i < emptyStars; i++) {
+      stars += '<i class="far fa-star text-gray-400"></i>';
+    }
+  
+    return stars;
+  }
+  %>
 </head>
-<body class="dark:bg-background text-white min-h-screen flex flex-col">
-  <header class="bg-gray-900 py-6">
-    <div class="container mx-auto px-4 flex items-center justify-between">
+<body class="example bg-background-50 text-text-800 min-h-screen flex flex-col overflow-x-hidden">
+  <header class="py-6">
+    <div class="bg-secondary-300 w-fit flex flex-col container mx-auto px-4 items-center rounded-lg shadow-lg">
       <h1 class="text-3xl font-bold">Books I've Read - Luca Wang</h1>
     </div>
   </header>
   <main class="container mx-auto px-4 py-8 flex-grow">
-    <%
-function renderStars(rating) {
-  let stars = '';
-  const fullStars = Math.floor(rating);
-  const hasHalfStar = rating % 1 !== 0;
-
-  // Render full stars
-  for (let i = 0; i < fullStars; i++) {
-    stars += '<i class="fas fa-star text-yellow-400"></i>';
-  }
-
-  // Render half star if necessary
-  if (hasHalfStar) {
-    stars += '<i class="fas fa-star-half-alt text-yellow-400"></i>';
-  }
-
-  // Render empty stars
-  const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
-  for (let i = 0; i < emptyStars; i++) {
-    stars += '<i class="far fa-star text-gray-400"></i>';
-  }
-
-  return stars;
-}
-%>
     <div class="space-y-6">
       <% if (notes.length === 0) { %>
         <div class="text-center">
@@ -49,20 +49,20 @@ function renderStars(rating) {
         </div>
       <% } else { %>
         <% for (let note of notes) { %>
-          <div class="bg-gray-800 rounded-lg shadow-lg p-4 flex">
-            <div class="w-32 h-48 bg-gray-700 rounded-lg mr-4 flex-shrink-0">
+          <div class="bg-background-100 shadow-lg rounded-lg  p-4 flex">
+            <div class="w-32 h-48 bg-background-200 rounded-lg mr-4 flex-shrink-0">
                <a href="/book/<%= note.id %>"><img src="images/<%= note.id %>.jpg"  class="w-full h-full object-cover rounded-lg"></a> 
             </div>
             <div class="flex-grow flex flex-col justify-between">
               <div>
                 <a href="/book/<%= note.id %>" class="text-xl font-bold mb-2 hover:text-purple-400"><%= note.title %></a>
-                <p class="text-gray-400 mb-1"><%= note.author %></p>
+                <p class="text-text-600 mb-1"><%= note.author %></p>
                 <div class="flex items-center mb-2">
                   <%- renderStars(note.rating) %>
                 </div>
                 <p class="text-gray-300"><%= note.description %></p>
               </div>
-              <a href="/book/<%= note.id %>" class="bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded mt-4 self-start">Read More</a>
+              <a href="/book/<%= note.id %>" class="bg-primary-600 hover:bg-primary-700 text-text-50 py-2 px-4 rounded mt-4 self-start">Read More</a>
             </div>
           </div>
         <% } %>
