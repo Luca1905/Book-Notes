@@ -32,6 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Routes
 app.get("/", async (req, res) => {
   const notes = await getNotesFromDatabase();
+  console.log(req.body);
   // const notes = [];
   try {
     for (let note = 0; note < notes.length; note++) {
@@ -57,6 +58,10 @@ app.get("/", async (req, res) => {
 
   res.render("index", { notes: notes });
 });
+
+app.post("/", async (req, res) => {
+  console.log(req.body);
+})
 
 app.get("/book/:id", async (req, res) => {
   const id = req.params.id;
